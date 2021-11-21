@@ -127,7 +127,7 @@ let ineq = function(x,y){//x,y are bigints
     
     
     //return xor(x%2n===0n, y%2n===0n);
-    return ((y/17n/(2n**(17n*x+y%17n)))%2n)*2n > 1n
+    return (((y/17n)/(2n**(17n*x+y%17n)))%2n)*2n > 1n
     //y/17n*2n,(-17n*x-y%17n),2n > 1n;
 };
 
@@ -137,8 +137,17 @@ let cw = new ELEM(document.querySelector("#wrapper"));
 let xg,yg;
 
 let main = function(){
+    let control = new Control();
+    let yin = control.addRow("textarea","label: y;").charmatch(/[0-9]/);
+    let xin = control.addRow("number","label: x;").charmatch(/[0-9]/);
+    let xin = control.addRow("number","label: x;");
+    control.addRow("submit",()=>{
+        yg = BigFloat(BigInt(yin.value));
+    });
+    Control("label: y; type: textarea;");
     let canvas = cw.add("canvas").e;
     let ctx = canvas.getContext("2d");
+    
     
     let keys = {};
     
